@@ -24,7 +24,7 @@ module.exports = {
                             + `\n\n**Report:** ${args.join(" ")}`);
 
         bot.channels.cache.get(Channels.bugReport).send(report).catch(err => ErrorLog.log(bot, msg, "bug [sending report]", err));
-        bot.channels.cache.get(Channels.bugReport).send(Roles.dev).catch(err => ErrorLog.log(bot, msg, "bug [notifying dev]", err));
+        bot.channels.cache.get(Channels.bugReport).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "bug [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")

@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const Channels = require("../util/channels.js");
-const Config = require("../util/config.js");
 const Emojis = require("../util/emoji.js");
 const ErrorLog = require("../util/error.js");
 const Format = require("../util/format.js");
@@ -25,7 +24,7 @@ module.exports = {
                             \n**Suggestion:** ${args.join(" ")}`);
 
         bot.channels.cache.get(Channels.suggestion).send(suggestion).catch(err => ErrorLog.log(bot, msg, "suggest [sending report]", err));
-        bot.channels.cache.get(Channels.suggestion).send(Roles.dev).catch(err => ErrorLog.log(bot, msg, "suggest [notifying dev]", err));
+        bot.channels.cache.get(Channels.suggestion).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "suggest [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
                 .setColor("#FFD983")
