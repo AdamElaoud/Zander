@@ -1,0 +1,19 @@
+{
+    "name": "zander",
+    "description": "Social wizard game for Discord",
+    "author": "@Sap#5703",
+    "dependencies": {
+        "discord.js": "12.2.0",
+        "dotenv-flow": "3.2.0",
+        "mongodb": "^3.6.2"
+    },
+    "scripts": {
+        "start": "node zander.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AdamElaoud/zander"
+    },
+    "main": "zander.js",
+    "version": "1.0.0"
+}
