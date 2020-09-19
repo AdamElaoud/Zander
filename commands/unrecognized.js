@@ -1,10 +1,8 @@
 const Discord = require("discord.js");
-const Channels = require("../util/channels.js");
-const Confid = require("../util/config.js");
+const Config = require("../util/config.js");
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
-const Roles = require("../util/roles.js");
 
 module.exports = {
     name: "unrecognized",

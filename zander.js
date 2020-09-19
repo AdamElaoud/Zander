@@ -26,7 +26,7 @@ for (const file of eventFiles) {
 }
 
 bot.on("ready", () => {
-	bot.user.setActivity(`🎩✨🐇 Conjuring Wabbits`);
+	bot.user.setActivity(`🎩 Conjuring`);
 	
 	const owner = bot.users.fetch(Config.owner.id).then(
 		function(user) {
