@@ -64,9 +64,6 @@ bot.on("message", message => {
 		case "servers":
 			bot.commands.get("servers").execute(bot, message);
 			break;
-		case "help":
-			bot.commands.get("help").execute(bot, message);
-			break;
 		case "invite":
 			bot.commands.get("invite").execute(bot, message);
 			break;

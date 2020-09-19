@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const Emojis = require("../util/emoji.js");
-const ErrorLog = require("../util/error.js");
+const Emojis = require("../util/emojis.js");
+const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
 
 module.exports = {
