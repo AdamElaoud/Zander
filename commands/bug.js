@@ -29,7 +29,7 @@ module.exports = {
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")
             .setTitle(`:wrench:${Format.space(1)} **━━━━━━━━ BUG REPORT ━━━━━━━━** ${Format.space(1)}:wrench:`)
-            .setDescription(`*Thank you for contributing to improving Kiwi!* ${Format.space(1)}${Emojis.zander.pub}`
+            .setDescription(`*Thank you for contributing to improving Zander!* ${Format.space(1)}${Emojis.zander.pub}`
                             + `\n\n**Bug Report:**`
                             + `\n${args.join(" ")}`
                             + `\n\n\n:white_check_mark: **Sucessfully Submitted to [${Format.support.text}](${Format.support.link})!**`)
