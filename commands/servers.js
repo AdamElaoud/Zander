@@ -83,7 +83,7 @@ module.exports = {
     generatePage(bot, servers, memberCount, page, pageCount) {
         let start = (page - 1) * 20;
         
-        if (start <= servers.length) {
+        if (start <= servers.length - 1) {
             let serverList = "";
             let dataList = "";
             let idList = "";
