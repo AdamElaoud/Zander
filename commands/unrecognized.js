@@ -13,7 +13,7 @@ module.exports = {
         
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setTitle(":exclamation: **━━━━━━━ ERROR ━━━━━━━** :exclamation:")
             .setDescription(`Unrecognized command: **${cmd}**`
                             + `\n\nUse the **\`${Config.prefix}help\`** command for a list of Kiwi's commands`)
             .addField("\u200b", "\u200b")
