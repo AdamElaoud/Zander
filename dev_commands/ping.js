@@ -7,7 +7,7 @@ const Format = require("../util/format.js");
 
 module.exports = {
     name: "ping",
-    description: "owner command to check bot's ping",
+    description: "dev command: check bot's ping",
     execute(bot, msg) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.zander.id));

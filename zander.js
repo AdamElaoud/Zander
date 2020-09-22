@@ -1,4 +1,4 @@
-// created by Adam Elaoud (Sap#5703)
+// created by Adam Elaoud (Sap#5703, ID: 193427298958049280)
 // copyright (c) 2020
 
 const Discord = require("discord.js");
@@ -8,17 +8,25 @@ require("dotenv-flow").config();
 
 // instantiate bot
 const bot = new Discord.Client();
-bot.commands = new Discord.Collection();
-bot.events = new Discord.Collection();
 
 // fill command collection
+bot.commands = new Discord.Collection();
 const commandFiles = FS.readdirSync("./commands");
 for (const file of commandFiles) {
 	let command = require(`./commands/${file}`);
 	bot.commands.set(command.name, command);
 }
 
+// fill dev command collection
+bot.devCommands = new Discord.Collection();
+const devCommandFiles = FS.readdirSync("./dev_commands");
+for (const file of devCommandFiles) {
+	let command = require(`./dev_commands/${file}`);
+	bot.devCommands.set(command.name, command);
+}
+
 // fill event collection
+bot.events = new Discord.Collection();
 const eventFiles = FS.readdirSync("./events");
 for (const file of eventFiles) {
 	let event = require(`./events/${file}`);
@@ -39,6 +47,7 @@ bot.on("ready", () => {
     console.log(`Logged in as ${bot.user.tag}!`);
 });
 
+// command parsing
 bot.on("message", message => {
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
 	if (message.author.bot || message.attachments.size !== 0 || !message.content.startsWith(Config.prefix))
@@ -58,11 +67,9 @@ bot.on("message", message => {
 
 	// checking command request
 	switch(command) {
-		case "ping":
-			bot.commands.get("ping").execute(bot, message);
-			break;
-		case "servers":
-			bot.commands.get("servers").execute(bot, message);
+		// player commands
+		case "school":
+			bot.commands.get("school").execute(bot, message);
 			break;
 		case "invite":
 			bot.commands.get("invite").execute(bot, message);
@@ -73,11 +80,25 @@ bot.on("message", message => {
 		case "suggest":
 			bot.commands.get("suggest").execute(bot, message, args);
 			break;
+
+		// dev commands
+		case "ping":
+			bot.devCommands.get("ping").execute(bot, message);
+			break;
+		case "servers":
+			bot.devCommands.get("servers").execute(bot, message);
+			break;
+		case "initplayer":
+			bot.devCommands.get("init_player").execute(bot, message, args);
+			break;
+
+		// unrecognized command
 		default:
 			bot.commands.get("unrecognized").execute(bot, message, command);
 	}
 });
 
+// event parsing
 bot.on("guildCreate", guild => {
 	bot.events.get("guildCreate").execute(bot, guild);
 });

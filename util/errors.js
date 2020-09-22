@@ -20,6 +20,6 @@ module.exports = {
             .setFooter(Format.footer.text, Format.footer.image);
 
         bot.channels.cache.get(Channels.errorLog).send(log);
-        bot.channels.cache.get(Channels.errorLog).send(Roles.dev);
+        bot.channels.cache.get(Channels.errorLog).send(Roles.dev.pub);
     }
 }

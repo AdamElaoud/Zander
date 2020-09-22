@@ -7,7 +7,7 @@ const Format = require("../util/format.js");
 
 module.exports = {
     name: "servers",
-    description: "owner command to check data on the servers the bot is currently in",
+    description: "dev command: check data on the servers the bot is currently in",
     execute(bot, msg) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.zander.id));

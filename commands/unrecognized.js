@@ -15,10 +15,10 @@ module.exports = {
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━━━ ERROR ━━━━━━━** :exclamation:")
             .setDescription(`Unrecognized command: **${cmd}**`
-                            + `\n\nUse the **\`${Config.prefix}help\`** command for a list of Kiwi's commands`)
+                            + `\n\nUse the **\`${Config.prefix} help\`** command for a list of Kiwi's commands`)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.link}) ${Emojis.zander.id}`
-                                        + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.id}`)
+            .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.link}) ${Emojis.zander.pub}`
+                                        + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
             .setFooter(Format.footer.text, Format.footer.image);
 
             msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, `unrecognized [${cmd}]`, err));
