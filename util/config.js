@@ -4,6 +4,6 @@ module.exports = {
         pub: "<@193427298958049280>"
     },
     prefix: "wiz",
-    devmode: false,
+    devmode: true,
     newUpdate: false
 }

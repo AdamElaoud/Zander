@@ -4,7 +4,7 @@ const Config = require("../util/config.js");
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
-const Init = require("../database/init_user.js");
+const Init = require("../database/init_doc.js");
 
 module.exports = {
     name: "init_player",
@@ -15,11 +15,11 @@ module.exports = {
 
         // allow usage only if user is the owner
         if (msg.author.id === Config.owner.id) {
-            const regex = /[0-9]{18}/g; // regex to isolate 18 digits of Discord ID
-            const id = args[0].match(regex)[0];
+            const id = Format.isolateID(args[0]);
             const mention = `<@${id}>`;
             let success = false;
 
+            // if valid id provided
             if (id !== null) {
                 try {
                     success = await Init.execute(bot, msg, id);

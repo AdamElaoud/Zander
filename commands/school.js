@@ -3,7 +3,7 @@ const MongoDB = require("mongodb").MongoClient;
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
-const Init = require("../database/init_user.js");
+const Init = require("../database/init_doc.js");
 
 module.exports = {
     name: "school",

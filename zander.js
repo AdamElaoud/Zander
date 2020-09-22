@@ -94,6 +94,9 @@ bot.on("message", message => {
 		case "initplayer":
 			bot.devCommands.get("init_player").execute(bot, message, args);
 			break;
+		case "resetplayer":
+			bot.devCommands.get("reset_player").execute(bot, message, args);
+			break;
 
 		// unrecognized command
 		default:

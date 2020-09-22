@@ -1,6 +1,6 @@
 require("dotenv-flow");
-const ErrorLog = require("../util/errors.js");
 const MongoDB = require("mongodb").MongoClient;
+const ErrorLog = require("../util/errors.js");
 
 module.exports = {
     name: "init_user",
@@ -35,9 +35,9 @@ module.exports = {
         const id = parseInt(userID);
 
         try {
-            // check if user is already in database
             let user = await users.findOne({ "_user" : id });
 
+            // check if user is already in database
             if (user !== null)
                 return false;
             

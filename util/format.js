@@ -25,5 +25,10 @@ module.exports = {
         }
 
         return whitespace;
+    },
+    isolateID(str) {
+        const regex = /[0-9]{18}/g; // regex to isolate 18 digits of Discord ID
+        
+        return str.match(regex)[0];
     }
 }
