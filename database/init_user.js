@@ -38,7 +38,7 @@ module.exports = {
             let user = await users.findOne({ "_user" : userID });
             console.log(user);
 
-            if (user == null)
+            if (user !== null)
                 return false;
             
             await users.insertOne(
