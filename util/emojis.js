@@ -1,12 +1,29 @@
 module.exports = {
+    // ZANDER
     zander: {
         id: "756915293325885616",
         pub: "<:zander:756915293325885616>"
     },
+
+    // MISC
     book: {
         id: "756930672710385735",
         pub: "<:wizbook:756930672710385735>"
     },
+
+    // COLLECTION
+    gold: {
+        id: "756962235204763648",
+        pub: "<:wizgold:756962235204763648>"
+    },
+
+    // STATUS
+    patreon: {
+        id: "757984988313419817",
+        pub: "<:patreon:757984988313419817>"
+    },
+    
+    // SCHOOLS
     storm: {
         id: "756962235338850354",
         pub: "<:wizstorm:756962235338850354>"

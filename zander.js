@@ -83,6 +83,13 @@ bot.on("message", message => {
 		case "suggest":
 			bot.commands.get("suggest").execute(bot, message, args);
 			break;
+		case "profile":
+			bot.commands.get("profile").execute(bot, message);
+			break;
+		case "lookup":
+			bot.commands.get("lookup").execute(bot, message);
+			break;
+			
 
 		// dev commands
 		case "ping":

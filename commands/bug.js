@@ -7,7 +7,7 @@ const Roles = require("../util/roles.js");
 
 module.exports = {
     name: "bug",
-    description: "command: report a bug with Kiwi",
+    description: "command: report a bug with Zander",
     execute(bot, msg, args) {
         let date = new Date();
 
