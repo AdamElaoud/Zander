@@ -44,7 +44,7 @@ module.exports = {
             await users.insertOne(
                 {
                     // BASE
-                    "_user": userID,
+                    "_user": parseInt(userID),
                     "_school": "none",
                     "_lvl": 1,
                     "_xp": 0,
