@@ -9,63 +9,80 @@ module.exports = {
     name: "school",
     description: "command: set player school",
     async execute(bot, msg, args) {
-        const school = args[0].toLowerCase();
+        // if no school was entered, give school info page
+        if (args.length !== 0) {
+            const school = args[0].toLowerCase();
 
-        // react to command
-        msg.react(bot.emojis.cache.get(Emojis.zander.id));
+            // react to command
+            msg.react(bot.emojis.cache.get(Emojis.zander.id));
+            
+            // create database client
+            const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+
+            // check user input
+            if (!module.exports.checkSchool(school)) {
+                const error = new Discord.MessageEmbed()
+                    .setColor("#DD2E44")
+                    .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+                    .setDescription(`You did not correctly enter a school!`
+                                    + `\n**You Entered:** ${args.join(" ")}`
+                                    + `\n\n**Schools:**`
+                                    + `\n${Emojis.storm.pub}**:** Storm, ${Emojis.fire.pub}**:** Fire, ${Emojis.ice.pub}**:** Ice, `
+                                    + `${Emojis.balance.pub}**:** Balance, ${Emojis.life.pub}**:** Life, ${Emojis.death.pub}**:** Death, `
+                                    + `${Emojis.myth.pub}**:** Myth`)
+                    .addField("\u200b", "\u200b")
+                    .setFooter(Format.footer.text, Format.footer.image);
+
+                msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "command school [bad input response]", err));
+            
+            } else {
+                try {
+                    await dbClient.connect();
+                    const db = dbClient.db("ZanderDB");
+                    const users = db.collection("users");
         
-        // create database client
-        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+                    let user = await users.findOne({ "_user" : msg.author.id });
+                    
+                    // if user is not in the database, add them
+                    if (user === null)
+                        await Init.execute(bot, msg, msg.author.id);
 
-        // check user input
-        if (!module.exports.checkSchool(school)) {
-            const error = new Discord.MessageEmbed()
-                .setColor("#DD2E44")
-                .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-                .setDescription(`You did not correct enter a school!`
-                                + `\n**You Entered:** ${args.join(" ")}`
-                                + `\n\n**Schools:**`
+                    // if the user has already selected a school
+                    if (user !== null && user._school !== "none") {
+                        msg.channel.send(module.exports.schoolEmbed("already chosen"));
+
+                    // set the users school
+                    } else {
+                        await users.findOneAndUpdate(
+                            { "_user" : msg.author.id },
+                            { 
+                                $set: {
+                                    "_school": school
+                                }
+                            }
+                        );
+                        
+                        msg.channel.send(module.exports.schoolEmbed(school)).catch(err => ErrorLog.log(bot, msg, "command school [sending update message]", err));
+                    }
+        
+                } catch (err) {
+                    ErrorLog.log(bot, msg, `command school`, err);
+                }
+            }
+    
+        // if no school was entered, give school info page
+        } else {
+            const info = new Discord.MessageEmbed()
+                .setColor("#9E3F3D")
+                .setTitle(`${Emojis.book.pub} **━━━━━ WIZARD SCHOOLS ━━━━━** ${Emojis.book.pub}`)
+                .setDescription(`\n\n**Schools:**`
                                 + `\n${Emojis.storm.pub}**:** Storm, ${Emojis.fire.pub}**:** Fire, ${Emojis.ice.pub}**:** Ice, `
                                 + `${Emojis.balance.pub}**:** Balance, ${Emojis.life.pub}**:** Life, ${Emojis.death.pub}**:** Death, `
                                 + `${Emojis.myth.pub}**:** Myth`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "command school [bad input response]", err));
-        
-        } else {
-            try {
-                await dbClient.connect();
-                const db = dbClient.db("ZanderDB");
-                const users = db.collection("users");
-    
-                let user = await users.findOne({ "_user" : parseInt(msg.author.id) });
-                
-                // if user is not in the database, add them
-                if (user === null)
-                    Init.execute(bot, msg, msg.author.id);
-
-                // if the user has already selected a school
-                if (user._school !== "none") {
-                    msg.channel.send(module.exports.schoolEmbed(`exists: ${user._school}`));
-
-                // set the users school
-                } else {
-                    await users.findOneAndUpdate(
-                        { "_user" : parseInt(msg.author.id) },
-                        { 
-                            $set: {
-                                "_school": school
-                            }
-                        }
-                    );
-                    
-                    msg.channel.send(module.exports.schoolEmbed(school)).catch(err => ErrorLog.log(bot, msg, "command school [sending update message]", err));
-                }
-    
-            } catch (err) {
-                ErrorLog.log(bot, msg, `command school`, err);
-            }
+            msg.channel.send(info).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "command school [school info response]", err));
         }
     },
     checkSchool(school) {
@@ -127,7 +144,7 @@ module.exports = {
             default:
                 schoolEmbed.setColor("#9E3F3D")
                     .setTitle(`${Emojis.book.pub} **━━━━━ SCHOOL ALREADY CHOSEN ━━━━━** ${Emojis.book.pub}`)
-                    .setDescription(`It seems you've already selected your school young ${school.split(" ")[1]} wizard!`)
+                    .setDescription(`It seems you've already selected your school young wizard!`)
                 break;
         }
 

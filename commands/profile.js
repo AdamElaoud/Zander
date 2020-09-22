@@ -9,19 +9,26 @@ const Levels = require("../game_data/levels.js");
 module.exports = {
     name: "profile",
     description: "command: view player's self profile",
-    async execute(bot, msg) {
+    async execute(bot, msg, args) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.zander.id));
 
         // create database client
         const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
 
+        // default to search for command issuer
+        let id = msg.author.id;
+
+        // if user entered member to search, search for them instead
+        if (args.length !== 0)
+            id = Format.isolateID(args[0]);
+
         try {
             await dbClient.connect();
             const db = dbClient.db("ZanderDB");
             const users = db.collection("users");
 
-            let user = await users.findOne({ "_user": parseInt(msg.author.id) });
+            let user = await users.findOne({ "_user": id });
 
             // if user exists in the database
             if (user !== null) {
@@ -33,7 +40,7 @@ module.exports = {
                 const error = new Discord.MessageEmbed()
                     .setColor("#DD2E44")
                     .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-                    .setDescription(`Whoops! Looks like that person hasn't created an account!`)
+                    .setDescription(`Whoops! Looks like <@${id}> hasn't created an account!`)
                     .addField("\u200b", "\u200b")
                     .setFooter(Format.footer.text, Format.footer.image);
 
@@ -56,33 +63,39 @@ module.exports = {
             switch (user._school) {
                 case "storm": 
                     profile.setColor("#662D91")
-                        .setTitle(`${Emojis.storm.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.storm.pub}`)
+                        .setTitle(`${Emojis.storm.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.storm.pub}`);
                     break;
                 case "fire":
                     profile.setColor("#E4292D")
-                            .setTitle(`${Emojis.fire.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.fire.pub}`)
+                            .setTitle(`${Emojis.fire.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.fire.pub}`);
                     break;
                 case "ice":
                     profile.setColor("#38CFFC")
-                        .setTitle(`${Emojis.ice.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.ice.pub}`)
+                        .setTitle(`${Emojis.ice.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.ice.pub}`);
                     break;
                 case "balance":
                     profile.setColor("#F64640")
-                        .setTitle(`${Emojis.balance.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.balance.pub}`)
+                        .setTitle(`${Emojis.balance.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.balance.pub}`);
                     break;
                 case "life":
                     profile.setColor("#2AB36D")
-                        .setTitle(`${Emojis.life.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.life.pub}`)
+                        .setTitle(`${Emojis.life.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.life.pub}`);
                     break;
                 case "death":
                     profile.setColor("#AEAEAE")
-                        .setTitle(`${Emojis.death.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.death.pub}`)
+                        .setTitle(`${Emojis.death.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.death.pub}`);
                     break;
                 case "myth":
                     profile.setColor("#F1DB5B")
-                        .setTitle(`${Emojis.myth.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.myth.pub}`)
+                        .setTitle(`${Emojis.myth.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.myth.pub}`);
                     break;
-            }
+                
+                // if user hasn't selected their school yet
+                default:
+                    profile.setColor("#9E3F3D")
+                        .setTitle(`${Emojis.book.pub} **━━━━━ ${discUser.username}'s PROFILE ━━━━━** ${Emojis.book.pub}`);
+                break;
+            }       
 
             profile.addField("\u200b", `**Gold:** ${user.gold._total} ${Emojis.gold.pub}`, true)
                 .addField("\u200b", `${Emojis.patreon.pub} **Patron:** ${user._patron ? "Yes" : "No"}`, true)
@@ -140,6 +153,10 @@ module.exports = {
                 break;
             case "myth":
                 description = `**Level** ${user._lvl} 1️⃣ Conjurer`;
+                break;
+            // if user hasn't selected school yet
+            default:
+                description = `**Level** ${user._lvl} 1️⃣ Wizard`;
                 break;
         }
 

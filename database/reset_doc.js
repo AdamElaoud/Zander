@@ -16,7 +16,7 @@ module.exports = {
             const users = db.collection("users");
 
             // delete user from database
-            await users.findOneAndDelete({ "_user": parseInt(userID) });
+            await users.findOneAndDelete({ "_user": userID });
             // reinitialize them with a new document
             await Init.execute(bot, msg, userID);
 
