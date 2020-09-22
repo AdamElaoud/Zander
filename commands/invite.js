@@ -15,9 +15,9 @@ module.exports = {
             .setTitle(`:envelope:${Format.space(1)} **━━━━━━ INVITE KIWI ━━━━━━** ${Format.space(1)}:envelope:`)
             .setDescription(`*Like what ya see?*`
                             + `\nHere's a link to invite Kiwi to **your server**!`
-                            + `\n\n[**Invite Me!**](${Format.bot.link}) ${Emojis.zander.id}`)
+                            + `\n\n[**Invite Me!**](${Format.bot.link}) ${Emojis.zander.pub}`)
             .addField("\u200b", "\u200b")
-            .addField("\u200b", `[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.id}`)
+            .addField("\u200b", `[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
             .setFooter(Format.footer.text, Format.footer.image);
         
         msg.channel.send(invite).catch(err => ErrorLog.log(bot, msg, "command invite", err));

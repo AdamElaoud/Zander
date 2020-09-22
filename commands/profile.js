@@ -154,7 +154,7 @@ module.exports = {
             case "myth":
                 description = `**Level** ${user._lvl} 1️⃣ Conjurer`;
                 break;
-            // if user hasn't selected school yet
+            // if user hasn't selected their school yet
             default:
                 description = `**Level** ${user._lvl} 1️⃣ Wizard`;
                 break;
