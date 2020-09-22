@@ -27,16 +27,16 @@ module.exports = {
         bot.channels.cache.get(Channels.suggestion).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "command suggest [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
-                .setColor("#FFD983")
-                .setTitle(`:bulb:${Format.space(1)} **━━━━━━━━ SUGGESTION ━━━━━━━━** ${Format.space(1)}:bulb:`)
-                .setDescription(`*Thank you for contributing to improving Zander!* ${Format.space(1)}${Emojis.zander.pub}`
-                                + `\n\n**Suggestion:**`
-                                + `\n${args.join(" ")}`
-                                + `\n\n\n:white_check_mark: **Sucessfully Submitted to [${Format.support.text}](${Format.support.link})!**`)
-                .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.zander.pub}`
-                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
-                .setFooter(Format.footer.text, Format.footer.image);
+            .setColor("#FFD983")
+            .setTitle(`:bulb:${Format.space(1)} **━━━━━━━━ SUGGESTION ━━━━━━━━** ${Format.space(1)}:bulb:`)
+            .setDescription(`*Thank you for contributing to improving Zander!* ${Format.space(1)}${Emojis.zander.pub}`
+                            + `\n\n**Suggestion:**`
+                            + `\n${args.join(" ")}`
+                            + `\n\n\n:white_check_mark: **Sucessfully Submitted to [${Format.support.text}](${Format.support.link})!**`)
+            .addField("\u200b", "\u200b")
+            .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.zander.pub}`
+                                        + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
+            .setFooter(Format.footer.text, Format.footer.image);
 
         msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, "command suggest [submission reply]", err));
     }

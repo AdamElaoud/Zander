@@ -36,12 +36,15 @@ for (const file of eventFiles) {
 bot.on("ready", () => {
 	bot.user.setActivity(`🎩 Conjuring`);
 	
-	bot.users.fetch(Config.owner.id).then(
-		function(user) {
-			let date = new Date();
-			user.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
-		}
-    ).catch(err => {console.log("Error sending message! Error: ", err.message)});
+	// send online notification if not in devmode
+	if (!Config.devmode) {
+		bot.users.fetch(Config.owner.id).then(
+			function(user) {
+				let date = new Date();
+				user.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
+			}
+		).catch(err => {console.log("Error sending message! Error: ", err.message)});
+	}
     
     // send launch notification
     console.log(`Logged in as ${bot.user.tag}!`);
@@ -69,7 +72,7 @@ bot.on("message", message => {
 	switch(command) {
 		// player commands
 		case "school":
-			bot.commands.get("school").execute(bot, message);
+			bot.commands.get("school").execute(bot, message, args);
 			break;
 		case "invite":
 			bot.commands.get("invite").execute(bot, message);
