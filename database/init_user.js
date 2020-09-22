@@ -36,7 +36,6 @@ module.exports = {
         try {
             // check if user is already in database
             let user = await users.findOne({ "_user" : parseInt(userID) });
-            console.log(user);
 
             if (user !== null)
                 return false;
