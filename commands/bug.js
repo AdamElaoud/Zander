@@ -7,7 +7,7 @@ const Roles = require("../util/roles.js");
 
 module.exports = {
     name: "bug",
-    description: "report a bug with Kiwi",
+    description: "command: report a bug with Kiwi",
     execute(bot, msg, args) {
         let date = new Date();
 
@@ -23,8 +23,8 @@ module.exports = {
                             + `\n**Server:** "${msg.guild.name}" (ID: ${msg.guild.id})`
                             + `\n\n**Report:** ${args.join(" ")}`);
 
-        bot.channels.cache.get(Channels.bugReport).send(report).catch(err => ErrorLog.log(bot, msg, "bug [sending report]", err));
-        bot.channels.cache.get(Channels.bugReport).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "bug [notifying dev]", err));
+        bot.channels.cache.get(Channels.bugReport).send(report).catch(err => ErrorLog.log(bot, msg, "commnd bug [sending report]", err));
+        bot.channels.cache.get(Channels.bugReport).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "command bug [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")
@@ -38,6 +38,6 @@ module.exports = {
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
             .setFooter(Format.footer.text, Format.footer.image);
 
-        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, "bug [submission reply]", err));
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, "command bug [submission reply]", err));
     }
 }

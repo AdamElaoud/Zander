@@ -7,7 +7,7 @@ const Roles = require("../util/roles.js");
 
 module.exports = {
     name: "suggest",
-    description: "submit a suggestion for Kiwi",
+    description: "command: submit a suggestion for Kiwi",
     execute(bot, msg, args) {
         let date = new Date();
 
@@ -23,8 +23,8 @@ module.exports = {
                             **Server:** "${msg.guild.name}" (ID: ${msg.guild.id})
                             \n**Suggestion:** ${args.join(" ")}`);
 
-        bot.channels.cache.get(Channels.suggestion).send(suggestion).catch(err => ErrorLog.log(bot, msg, "suggest [sending report]", err));
-        bot.channels.cache.get(Channels.suggestion).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "suggest [notifying dev]", err));
+        bot.channels.cache.get(Channels.suggestion).send(suggestion).catch(err => ErrorLog.log(bot, msg, "command suggest [sending report]", err));
+        bot.channels.cache.get(Channels.suggestion).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, "command suggest [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
                 .setColor("#FFD983")
@@ -38,6 +38,6 @@ module.exports = {
                                             + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
                 .setFooter(Format.footer.text, Format.footer.image);
 
-        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, "bug [submission reply]", err));
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, "command suggest [submission reply]", err));
     }
 }

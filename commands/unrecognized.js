@@ -21,6 +21,6 @@ module.exports = {
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.zander.pub}`)
             .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, `unrecognized [${cmd}]`, err));
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, `command unrecognized [${cmd}]`, err));
     }
 }

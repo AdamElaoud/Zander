@@ -32,10 +32,11 @@ module.exports = {
     },
     async init(bot, msg, db, userID) {
         const users = db.collection("users");
+        const id = parseInt(userID);
 
         try {
             // check if user is already in database
-            let user = await users.findOne({ "_user" : parseInt(userID) });
+            let user = await users.findOne({ "_user" : id });
 
             if (user !== null)
                 return false;
@@ -43,7 +44,7 @@ module.exports = {
             await users.insertOne(
                 {
                     // BASE
-                    "_user": parseInt(userID),
+                    "_user": id,
                     "_school": "none",
                     "_lvl": 1,
                     "_xp": 0,

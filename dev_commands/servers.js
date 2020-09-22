@@ -63,7 +63,7 @@ module.exports = {
                         }
                     );
                 }
-            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers", err));
+            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "dev command servers", err));
 
         } else {
             const embed = new Discord.MessageEmbed()
@@ -73,7 +73,7 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers [not dev response]", err));
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "dev command servers [not dev response]", err));
         }
     },
     resetTimer(left, right) {

@@ -33,7 +33,7 @@ module.exports = {
                             .addField("\u200b", "\u200b")
                             .setFooter(Format.footer.text, Format.footer.image);
             
-                        bot.channels.cache.get(Channels.devCmds).send(init).catch(err => ErrorLog.log(bot, msg, `sending successful init message of ${mention} init`, err));
+                        bot.channels.cache.get(Channels.devCmds).send(init).catch(err => ErrorLog.log(bot, msg, `dev command init_player: successful init message of ${mention}`, err));
                     } else {
                         const init = new Discord.MessageEmbed()
                             .setColor("#55ACEE")
@@ -42,11 +42,11 @@ module.exports = {
                             .addField("\u200b", "\u200b")
                             .setFooter(Format.footer.text, Format.footer.image);
             
-                        bot.channels.cache.get(Channels.devCmds).send(init).catch(err => ErrorLog.log(bot, msg, `sending pre-existing player message for ${mention} init`, err));
+                        bot.channels.cache.get(Channels.devCmds).send(init).catch(err => ErrorLog.log(bot, msg, `dev command init_player: pre-existing player message for ${mention}`, err));
                     }
     
                 } catch (err) {
-                    ErrorLog.log(bot, msg, `dev command: initializing player ${mention}`, err)
+                    ErrorLog.log(bot, msg, `dev command init_player: ${mention}`, err);
                 }
 
             } else {
@@ -58,7 +58,7 @@ module.exports = {
                     .addField("\u200b", "\u200b")
                     .setFooter(Format.footer.text, Format.footer.image);
 
-                msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "ping [not dev response]", err));
+                msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "dev command init_player [ID error]", err));
             }
 
         } else {
@@ -69,7 +69,7 @@ module.exports = {
                 .addField("\u200b", "\u200b")
                 .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "ping [not dev response]", err));
+            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "dev command init_player [not dev response]", err));
         }
     }
 }

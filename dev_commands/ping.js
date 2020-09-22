@@ -25,7 +25,7 @@ module.exports = {
                 .addField("\u200b", "\u200b")
                 .setFooter(Format.footer.text, Format.footer.image);
 
-                bot.channels.cache.get(Channels.devCmds).send(ping).catch(err => ErrorLog.log(bot, msg, "ping", err));
+                bot.channels.cache.get(Channels.devCmds).send(ping).catch(err => ErrorLog.log(bot, msg, "dev command ping", err));
 
         } else {
             const error = new Discord.MessageEmbed()
@@ -35,7 +35,7 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "ping [not dev response]", err));
+            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "dev command ping [not dev response]", err));
         }
     }
 }
