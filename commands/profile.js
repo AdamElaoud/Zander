@@ -104,7 +104,7 @@ module.exports = {
                 .addField("Fish", `${user.fish._caught} 🐟 caught`, true)
                 .addField("\u200b", "\u200b", true)
                 .addField("Spells", `${user.spells._total} ✨ learned`, true)
-                .addField("Reagents", `${user.fish._caught} 🧪 collected`, true)
+                .addField("Reagents", `${user.reagents._collected} 🧪 collected`, true)
                 .addField("\u200b", "\u200b", true)
                 .addField("\u200b", "\u200b");
 
