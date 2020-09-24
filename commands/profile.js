@@ -20,8 +20,12 @@ module.exports = {
         let id = msg.author.id;
 
         // if user entered member to search, search for them instead
-        if (args.length !== 0)
-            id = Format.isolateID(args[0]);
+        if (args.length !== 0) {
+            temp = Format.isolateID(args[0]);
+            
+            if (temp !== null)
+                id = temp;
+        }
 
         try {
             await dbClient.connect();
@@ -97,7 +101,7 @@ module.exports = {
                 break;
             }       
 
-            profile.addField("\u200b", `**Gold:** ${user.gold._total} ${Emojis.gold.pub}`, true)
+            profile.addField("\u200b", `**Gold:** ${user.gold._total.toLocaleString()} ${Emojis.gold.pub}`, true)
                 .addField("\u200b", `${Emojis.patreon.pub} **Patron:** ${user._patron ? "Yes" : "No"}`, true)
                 .addField("\u200b", "\u200b", true)
                 .addField("TCs", `${user.TCs._collected} 🃏 collected`, true)
