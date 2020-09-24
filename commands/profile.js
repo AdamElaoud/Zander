@@ -111,8 +111,8 @@ module.exports = {
             return profile;
     },
     xpBar(xp, level) {
-        const filled = "⬜";
-        const empty = "🔳";
+        const filled = "▰";
+        const empty = "▱";
         const numberOfSegments = 7;
         let xpBar = "";
 
