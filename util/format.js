@@ -1,7 +1,7 @@
 module.exports = {
     footer: {
         text: "© Sap#5703",
-        image: "https://i.imgur.com/zg3KeEH.png"
+        image: "https://i.imgur.com/c5AskA7.png"
     },
     server: {
         text: "Join Us!",
