@@ -95,10 +95,10 @@ bot.on("message", message => {
 		case "servers":
 			bot.devCommands.get("servers").execute(bot, message);
 			break;
-		case "initplayer":
+		case "init":
 			bot.devCommands.get("init_player").execute(bot, message, args);
 			break;
-		case "resetplayer":
+		case "reset":
 			bot.devCommands.get("reset_player").execute(bot, message, args);
 			break;
 

@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+require("mongodb");
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
@@ -23,8 +24,10 @@ module.exports = {
                 id = temp;
         }
 
+        // create database client
+        const dbClient = MongoConnector.client();
+
         try {
-            const dbClient = MongoConnector.client();
             const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
             const users = db.collection("users");
 

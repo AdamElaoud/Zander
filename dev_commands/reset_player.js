@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+require("mongodb");
 const Channels = require("../util/channels.js");
 const Config = require("../util/config.js");
 const Emojis = require("../util/emojis.js");
