@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const MongoDB = require("mongodb").MongoClient;
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
-const Init = require("../database/init_doc.js");
+const MongoConnector = require("../util/mongo.js");
+const UserDoc = require("../database/user_doc.js");
 
 module.exports = {
     name: "school",
@@ -15,9 +15,6 @@ module.exports = {
 
             // react to command
             msg.react(bot.emojis.cache.get(Emojis.zander.id));
-            
-            // create database client
-            const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
 
             // check user input
             if (!module.exports.checkSchool(school)) {
@@ -37,15 +34,16 @@ module.exports = {
             
             } else {
                 try {
-                    await dbClient.connect();
-                    const db = dbClient.db("ZanderDB");
+                    // create database client
+                    const dbClient = MongoConnector.client();
+                    const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
                     const users = db.collection("users");
         
                     let user = await users.findOne({ "_user" : msg.author.id });
                     
                     // if user is not in the database, add them
                     if (user === null)
-                        await Init.execute(bot, msg, msg.author.id);
+                        await UserDoc.init(bot, msg, msg.author.id);
 
                     // if the user has already selected a school
                     if (user !== null && user._school !== "none") {
@@ -67,6 +65,9 @@ module.exports = {
         
                 } catch (err) {
                     ErrorLog.log(bot, msg, `command school`, err);
+                
+                } finally {
+                    dbClient.close();
                 }
             }
     

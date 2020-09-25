@@ -1,5 +1,5 @@
 require("dotenv-flow");
-const MongoConnector = require("../uti;/mongo.js");
+const MongoConnector = require("../util/mongo.js");
 const ErrorLog = require("../util/errors.js");
 
 module.exports = {
@@ -9,7 +9,8 @@ module.exports = {
         let success = false;
 
         try {
-            const db = MongoConnector.connect(bot, msg, "ZanderDB");
+            const dbClient = MongoConnector.client();
+            const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
 
             success = await new Promise((resolve, reject) => {
                 let initialized = module.exports.init_doc(bot, msg, db, userID);
@@ -28,13 +29,12 @@ module.exports = {
     },
     async reset(bot, msg, userID) {
         try {
-            const db = MongoConnector.connect(bot, msg, "ZanderDB");
+            const dbClient = MongoConnector.client();
+            const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
             const users = db.collection("users");
 
             // delete user from database
             await users.findOneAndDelete({ "_user": userID });
-            // reinitialize them with a new document
-            module.exports.init(bot, msg, userID);
 
         } catch (err) {
             ErrorLog.log(bot, msg, `reset_user <@${userID}>`, err);
@@ -42,6 +42,9 @@ module.exports = {
         } finally {
             dbClient.close();
         }
+
+        // reinitialize them with a new document
+        module.exports.init(bot, msg, userID);
     },
     async init_doc(bot, msg, db, userID) {
         const users = db.collection("users");

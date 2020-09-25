@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
-require("dotenv-flow");
-const MongoDB = require("mongodb").MongoClient;
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
 const Levels = require("../game_data/levels.js");
+const MongoConnector = require("../util/mongo.js");
 
 module.exports = {
     name: "profile",
@@ -12,9 +11,6 @@ module.exports = {
     async execute(bot, msg, args) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.zander.id));
-
-        // create database client
-        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
 
         // default to search for command issuer
         let id = msg.author.id;
@@ -28,8 +24,8 @@ module.exports = {
         }
 
         try {
-            await dbClient.connect();
-            const db = dbClient.db("ZanderDB");
+            const dbClient = MongoConnector.client();
+            const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
             const users = db.collection("users");
 
             let user = await users.findOne({ "_user": id });
