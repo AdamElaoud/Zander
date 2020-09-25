@@ -38,7 +38,7 @@ module.exports = {
                 const dbClient = MongoConnector.client();
                 
                 try {
-                    const db = MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
+                    const db = await MongoConnector.connect(bot, msg, "ZanderDB", dbClient);
                     const users = db.collection("users");
         
                     let user = await users.findOne({ "_user" : msg.author.id });
