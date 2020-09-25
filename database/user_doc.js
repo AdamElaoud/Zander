@@ -1,22 +1,18 @@
 require("dotenv-flow");
-const MongoDB = require("mongodb").MongoClient;
+const MongoConnector = require("../uti;/mongo.js");
 const ErrorLog = require("../util/errors.js");
 
 module.exports = {
-    name: "init_user",
-    description: "inititialize a user into the database",
-    async execute(bot, msg, userID) {
+    name: "user document manipulation",
+    description: "manipulate a user's data in the database",
+    async init(bot, msg, userID) {
         let success = false;
 
-        // create database client
-        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-
         try {
-            await dbClient.connect();
-            const db = dbClient.db("ZanderDB");
+            const db = MongoConnector.connect(bot, msg, "ZanderDB");
 
             success = await new Promise((resolve, reject) => {
-                let initialized = module.exports.init(bot, msg, db, userID);
+                let initialized = module.exports.init_doc(bot, msg, db, userID);
                 resolve(initialized);
                 reject("failed to add player document to database");
             });
@@ -30,7 +26,24 @@ module.exports = {
 
         return success;
     },
-    async init(bot, msg, db, userID) {
+    async reset(bot, msg, userID) {
+        try {
+            const db = MongoConnector.connect(bot, msg, "ZanderDB");
+            const users = db.collection("users");
+
+            // delete user from database
+            await users.findOneAndDelete({ "_user": userID });
+            // reinitialize them with a new document
+            module.exports.init(bot, msg, userID);
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, `reset_user <@${userID}>`, err);
+
+        } finally {
+            dbClient.close();
+        }
+    },
+    async init_doc(bot, msg, db, userID) {
         const users = db.collection("users");
 
         try {

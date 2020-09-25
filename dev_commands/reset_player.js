@@ -4,7 +4,7 @@ const Config = require("../util/config.js");
 const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
-const Reset = require("../database/reset_doc.js");
+const UserDoc = require("../database/user_doc.js");
 
 module.exports = {
     name: "reset_player",
@@ -21,7 +21,7 @@ module.exports = {
             // if valid id provided
             if (id !== null) {
                 try {
-                    await Reset.execute(bot, msg, id);
+                    await UserDoc.reset(bot, msg, id);
 
                     const reset = new Discord.MessageEmbed()
                         .setColor("#55ACEE")
