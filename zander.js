@@ -43,7 +43,7 @@ bot.on("ready", () => {
 				let date = new Date();
 				user.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
 			}
-		).catch(err => {console.log("Error sending message! Error: ", err.message)});
+		).catch(err => { console.log(`Error sending message! Error: ${err}`) });
 	}
     
     // send launch notification
@@ -53,7 +53,7 @@ bot.on("ready", () => {
 // command parsing
 bot.on("message", message => {
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || !message.content.startsWith(Config.prefix))
+	if (message.author.bot || message.attachments.size !== 0 || !message.content.startsWith(Config.prefix()))
 		return;
 
 	// if in devmode, only respond to dev
@@ -62,7 +62,7 @@ bot.on("message", message => {
 	}
 
 	// parsing command and arguments beginning after the prefix
-	let args = message.content.substring(Config.prefix.length).split(/[\s|\r?\n|\r]/);
+	let args = message.content.substring(Config.prefix().length).split(/[\s|\r?\n|\r]/);
 	// remove any remaining empty space
 	args = args.filter(ele => ele !== "" && ele !== " ");
 	// retrieve command
@@ -100,6 +100,12 @@ bot.on("message", message => {
 			break;
 		case "reset":
 			bot.devCommands.get("reset_player").execute(bot, message, args);
+			break;
+		case "+gold":
+			bot.devCommands.get("gold").execute(bot, message, args, "added");
+			break;
+		case "=gold":
+			bot.devCommands.get("gold").execute(bot, message, args, "set");
 			break;
 
 		// unrecognized command

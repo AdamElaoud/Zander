@@ -1,4 +1,3 @@
-require("dotenv-flow");
 require("mongodb");
 const MongoConnector = require("../util/mongo.js");
 const ErrorLog = require("../util/errors.js");

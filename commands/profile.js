@@ -40,14 +40,7 @@ module.exports = {
                 msg.channel.send(printout).catch(err => ErrorLog.log(bot, msg, "command profile [sending profile]", err));
 
             } else {
-                const error = new Discord.MessageEmbed()
-                    .setColor("#DD2E44")
-                    .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-                    .setDescription(`Whoops! Looks like <@${id}> hasn't created an account!`)
-                    .addField("\u200b", "\u200b")
-                    .setFooter(Format.footer.text, Format.footer.image);
-
-                msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "command profile [not in db response]", err));
+                msg.channel.send(ErrorLog.accountError(id)).catch(err => ErrorLog.log(bot, msg, "command profile [not in db response]", err));
             }
 
         } catch (err) {

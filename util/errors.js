@@ -21,5 +21,15 @@ module.exports = {
 
         bot.channels.cache.get(Channels.errorLog).send(log);
         bot.channels.cache.get(Channels.errorLog).send(Roles.dev.pub);
+    },
+    accountError(id) {
+        const error = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setDescription(`Whoops! Looks like <@${id}> hasn't created an account!`)
+            .addField("\u200b", "\u200b")
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        return error;
     }
 }

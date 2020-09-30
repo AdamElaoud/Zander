@@ -4,7 +4,7 @@ const Emojis = require("../util/emojis.js");
 const ErrorLog = require("../util/errors.js");
 const Format = require("../util/format.js");
 const MongoConnector = require("../util/mongo.js");
-const UserDoc = require("../database/user_doc.js");
+const UserDoc = require("../database/edit_user.js");
 
 module.exports = {
     name: "school",
