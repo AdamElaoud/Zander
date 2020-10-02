@@ -96,16 +96,13 @@ bot.on("message", message => {
 			bot.devCommands.get("servers").execute(bot, message);
 			break;
 		case "init":
-			bot.devCommands.get("init_player").execute(bot, message, args);
+			bot.devCommands.get("init").execute(bot, message, args);
 			break;
 		case "reset":
-			bot.devCommands.get("reset_player").execute(bot, message, args);
+			bot.devCommands.get("reset").execute(bot, message, args);
 			break;
-		case "+gold":
-			bot.devCommands.get("gold").execute(bot, message, args, "added");
-			break;
-		case "=gold":
-			bot.devCommands.get("gold").execute(bot, message, args, "set");
+		case "edit":
+			bot.devCommands.get("edit").execute(bot, message, args);
 			break;
 
 		// unrecognized command

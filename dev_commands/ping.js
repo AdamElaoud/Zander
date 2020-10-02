@@ -28,14 +28,7 @@ module.exports = {
             bot.channels.cache.get(Channels.devCmds).send(ping).catch(err => ErrorLog.log(bot, msg, "dev command ping", err));
 
         } else {
-            const error = new Discord.MessageEmbed()
-                .setColor("#DD2E44")
-                .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-                .setDescription(`You must be the bot owner, ${Config.owner.pub}, to use this command!`)
-                .addField("\u200b", "\u200b")
-                .setFooter(Format.footer.text, Format.footer.image);
-
-            msg.channel.send(error).catch(err => ErrorLog.log(bot, msg, "dev command ping [not dev response]", err));
+            msg.channel.send(ErrorLog.ownerError()).catch(err => ErrorLog.log(bot, msg, "dev command ping [not dev response]", err));
         }
     }
 }

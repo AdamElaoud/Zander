@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Config = require("./config.js");
 const Channels = require("./channels.js");
 const Format = require("./format.js");
 const Roles = require("./roles.js");
@@ -30,6 +31,27 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
+        return error;
+    },
+    ownerError() {
+        const error = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setDescription(`You must be the bot owner, ${Config.owner.pub}, to use this command!`)
+            .addField("\u200b", "\u200b")
+            .setFooter(Format.footer.text, Format.footer.image);
+        
+        return error;
+    },
+    badInputError(input) {
+        const error = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setDescription(`You did not provide the correct input!`
+                            + `\n\nYou entered: **"${input}"**`)
+            .addField("\u200b", "\u200b")
+            .setFooter(Format.footer.text, Format.footer.image);
+        
         return error;
     }
 }
