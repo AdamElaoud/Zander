@@ -19,8 +19,6 @@ module.exports = {
         if (msg.author.id === Config.owner.id) {
             // if inputs are provided
             if (args.length === 2) {
-                let success = true;
-
                 // get user id
                 const userID = Format.isolateID(args.shift());
 
