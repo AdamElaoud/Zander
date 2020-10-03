@@ -53,7 +53,7 @@ module.exports = {
                             error = "❗";
                         }                            
 
-                        completed += `▫️${error}${op} ${field} ${val}\n`;
+                        completed += `▫️${error} ${field} **${op}${val}**\n`;
                     });
 
                     if (completed.length !== 0) {
