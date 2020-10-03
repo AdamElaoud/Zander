@@ -53,12 +53,12 @@ module.exports = {
                             error = "❗";
                         }                            
 
-                        completed += `▫️${error} ${field} **${op}${val}**\n`;
+                        completed += `▫️${error} ${field} **${op} ${val}**\n`;
                     });
 
                     if (completed.length !== 0) {
                         const update = new Discord.MessageEmbed()
-                            .setColor("#D1C600")
+                            .setColor("#C1694F")
                             .setTitle(`📋 **━━━ PLAYER EDITED ━━━** 📋`)
                             .setDescription(`Successfully edited user: <@${userID}>`
                                             + `\n\n**completed edits:**`
