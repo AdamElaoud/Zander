@@ -86,8 +86,15 @@ bot.on("message", message => {
 		case "profile":
 			bot.commands.get("profile").execute(bot, message, args);
 			break;
+		case "scavenge":
+		case "search":
+		case "collect":
+			bot.commands.get("scavenge").execute(bot, message, args);
+			break;
+		case "worlds":
+			bot.commands.get("worlds").execute(bot, message);
+			break;
 			
-
 		// dev commands
 		case "ping":
 			bot.devCommands.get("ping").execute(bot, message);

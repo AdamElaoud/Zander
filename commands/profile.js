@@ -126,33 +126,33 @@ module.exports = {
         return xpBar;
     },
     profileDesc(user) {
-        let description;
+        let description = `**Level** ${Emojis.levels[user._lvl].pub}`;
 
         switch (user._school) {
             case "storm":
-                description = `**Level** ${user._lvl} 1️⃣ Diviner`;
+                description += ` Diviner`;
                 break;
             case "fire":
-                description = `**Level** ${user._lvl} 1️⃣ Pyromancer`;
+                description += ` Pyromancer`;
                 break;
             case "ice":
-                description = `**Level** ${user._lvl} 1️⃣ Thaumaturge`;
+                description += ` Thaumaturge`;
                 break;
             case "balance":
-                description = `**Level** ${user._lvl} 1️⃣ Sorcerer`;
+                description += ` Sorcerer`;
                 break;
             case "life":
-                description = `**Level** ${user._lvl} 1️⃣ Theurgist`;
+                description += ` Theurgist`;
                 break;
             case "death":
-                description = `**Level** ${user._lvl} 1️⃣ Necromancer`;
+                description += ` Necromancer`;
                 break;
             case "myth":
-                description = `**Level** ${user._lvl} 1️⃣ Conjurer`;
+                description += ` Conjurer`;
                 break;
             // if user hasn't selected their school yet
             default:
-                description = `**Level** ${user._lvl} 1️⃣ Wizard`;
+                description += ` Wizard`;
                 break;
         }
 
