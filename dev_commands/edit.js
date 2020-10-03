@@ -41,15 +41,19 @@ module.exports = {
                         const field = cmdArray[0];
                         const op = cmdArray[1];
                         const val = cmdArray[2];
+                        let error = "";
 
-                        if (DBMap.fields.includes(field))
+                        if (DBMap.fields.includes(field)) {
                             Edit.field(bot, msg, field, op, val, userID);
-                        else if (DBMap.arrays.includes(field))
+                        } else if (DBMap.arrays.includes(field)) {
                             Edit.element(bot, msg, field, op, val, userID);
-                        else
+                        } else {
                             ErrorLog.log(bot, msg, `dev command edit`, `field ${field} not listed in the database map`);
+                            error = "❗";
+                        }                            
 
-                        completed += `▫️${op}${field} ${val}\n`;
+                        completed += `▫️${error}${op}${field} ${val}\n`;
+                        error = "";
                     });
 
                     if (completed.length !== 0) {
