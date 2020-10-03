@@ -43,19 +43,17 @@ module.exports = {
                         const op = cmdArray[1];
                         const val = cmdArray[2];
 
-                        if (DBMap.fields.includes(field)) {
+                        if (DBMap.fields.includes(field))
                             Edit.field(bot, msg, field, op, val, userID);
-                        } else if (DBMap.arrays.includes(field)) {
+                        else if (DBMap.arrays.includes(field))
                             Edit.element(bot, msg, field, op, val, userID);
-                        } else {
+                        else
                             ErrorLog.log(bot, msg, `dev command edit`, `field ${field} not listed in the database map`);
-                            success = false;
-                        }
 
                         completed += `▫️${op}${field} ${val}\n`;
                     });
 
-                    if (success) {
+                    if (success && completed.length !== 0) {
                         const update = new Discord.MessageEmbed()
                             .setColor("#D1C600")
                             .setTitle(`📋 **━━━ PLAYER EDITED ━━━** 📋`)
