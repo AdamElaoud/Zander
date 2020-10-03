@@ -35,6 +35,7 @@ module.exports = {
 
                         if (cmdArray.length !== 3) {
                             ErrorLog.log(bot, msg, `dev command edit`, `error parsing ${cmd} for edit`);
+                            completed += `▫️❗${cmd}\n`;
                             return;
                         }
 
@@ -52,8 +53,7 @@ module.exports = {
                             error = "❗";
                         }                            
 
-                        completed += `▫️${error}${op}${field} ${val}\n`;
-                        error = "";
+                        completed += `▫️${error}${op} ${field} ${val}\n`;
                     });
 
                     if (completed.length !== 0) {
