@@ -35,7 +35,6 @@ module.exports = {
 
                         if (cmdArray.length !== 3) {
                             ErrorLog.log(bot, msg, `dev command edit`, `error parsing ${cmd} for edit`);
-                            success = false;
                             return;
                         }
 
@@ -53,7 +52,7 @@ module.exports = {
                         completed += `▫️${op}${field} ${val}\n`;
                     });
 
-                    if (success && completed.length !== 0) {
+                    if (completed.length !== 0) {
                         const update = new Discord.MessageEmbed()
                             .setColor("#D1C600")
                             .setTitle(`📋 **━━━ PLAYER EDITED ━━━** 📋`)
