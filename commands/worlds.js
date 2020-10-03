@@ -11,7 +11,7 @@ module.exports = {
         msg.react(bot.emojis.cache.get(Emojis.zander.id));
         
         const worlds = new Discord.MessageEmbed()
-            .setColor("#CCD6DD")
+            .setColor("#9B98CA")
             .setTitle(`${Emojis.global.pub} **━━━━━━ WORLD PORTAL ━━━━━━** ${Emojis.global.pub}`)
             .setDescription(`**Use the reactions below to see the different worlds!**`)
             .addField("\u200b", "\u200b")

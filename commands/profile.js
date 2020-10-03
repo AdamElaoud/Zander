@@ -96,11 +96,11 @@ module.exports = {
             profile.addField("\u200b", `**Gold:** ${user.gold._total.toLocaleString()} ${Emojis.gold.pub}`, true)
                 .addField("\u200b", `${Emojis.patreon.pub} **Patron:** ${user._patron ? "Yes" : "No"}`, true)
                 .addField("\u200b", "\u200b", true)
-                .addField("TCs", `${user.TCs._collected} 🃏 collected`, true)
-                .addField("Fish", `${user.fish._caught} 🐟 caught`, true)
+                .addField("TCs", `${user.TCs._collected.toLocaleString()} 🃏 collected`, true)
+                .addField("Fish", `${user.fish._caught.toLocaleString()} 🐟 caught`, true)
                 .addField("\u200b", "\u200b", true)
-                .addField("Spells", `${user.spells._total} ✨ learned`, true)
-                .addField("Reagents", `${user.reagents._collected} 🧪 collected`, true)
+                .addField("Spells", `${user.spells._total.toLocaleString()} ✨ learned`, true)
+                .addField("Reagents", `${user.reagents._collected.toLocaleString()} 🧪 collected`, true)
                 .addField("\u200b", "\u200b", true)
                 .addField("\u200b", "\u200b");
 
