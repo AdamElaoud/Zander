@@ -61,7 +61,7 @@ module.exports = {
                             .setColor("#C1694F")
                             .setTitle(`📋 **━━━ PLAYER EDITED ━━━** 📋`)
                             .setDescription(`Successfully edited user: <@${userID}>`
-                                            + `\n\n**completed edits:**`
+                                            + `\n\n**Completed edits:**`
                                             + `\n${completed}`)
                             .addField("\u200b", "\u200b")
                             .setFooter(Format.footer.text, Format.footer.image);
